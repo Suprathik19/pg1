@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+
+  <!-- EmailJS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #fff5ef;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: #ffffff;
+      width: 420px;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+      display: block;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      border: 1px solid #f1e0d6;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 18px;
+      background: #fffaf7;
+    }
+
+    .input-group span {
+      font-size: 18px;
+      margin-right: 10px;
+      color: #b07d62;
+    }
+
+    .input-group input {
+      border: none;
+      outline: none;
+      width: 100%;
+      background: transparent;
+      font-size: 15px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #888;
+      margin-top: -12px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #f07c2b;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e36f20;
+    }
+
+    /* Success message (no CSS file touched) */
+    #successMessage {
+      display: none;
+    }
+
+    #successMessage h3 {
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>Registration</h2>
+
+    <!-- FORM -->
+    <form id="registerForm">
+      <label>Full Name</label>
+      <div class="input-group">
+        <span>👤</span>
+        <input type="text" name="full_name" placeholder="Enter your full name" required>
+      </div>
+
+      <label>Mobile Number</label>
+      <div class="input-group">
+        <span>📱</span>
+        <input type="tel" name="mobile" placeholder="Enter your mobile number" pattern="[0-9]{10}" required>
+      </div>
+      <div class="hint">Must be a valid 10-digit number</div>
+
+      <label>Email Address</label>
+      <div class="input-group">
+        <span>✉️</span>
+        <input type="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <button type="submit">🚀 Submit Registration</button>
+    </form>
+
+    <!-- SUCCESS MESSAGE -->
+    <div id="successMessage">
+      <h3>Thank You for Registering!</h3>
+      <p>The respective PG admins will call you. Stay tuned.</p>
+    </div>
+  </div>
+
+<script>
+  // Initialize EmailJS
+  window.onload = function () {
+    emailjs.init("0Iyp6MUC2BWqAeqHT");
+  };
+
+  document.getElementById("registerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_bfs3nyd",
+      "template_bbpc709",
+      this
+    )
+    .then(() => {
+      document.getElementById("registerForm").style.display = "none";
+      document.getElementById("successMessage").style.display = "block";
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Failed to submit. Please try again.");
+    });
+  });
+</script>
+
+</body>
+</html>
